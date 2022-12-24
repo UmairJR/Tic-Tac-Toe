@@ -11,32 +11,31 @@ function SignUp({ setIsAuth }) {
   
   
   
-  const signUp = async (e) => {
-    const response = await serverClient.queryUsers({ name: { $autocomplete: 'vishnu' } });
-    console.log(response)
-    e.preventDefault()
-    Axios.get("http://localhost:3001/signup").then((res) => {
-      const { token, userId, yourName, email, username, password } = res.data;
-      console.log(res.data);
+  const signUp = async (error) => {
+    // const response = await serverClient.queryUsers({ name: { $autocomplete: 'vishnu' } });
+    // console.log(response)
+    // e.preventDefault()
+   
+    Axios.post("http://localhost:3001/signup", user).then((res) => {
+      const { token, userId, yourName, email, username, password } =
+      res.data;
+      console.log(token,"userid",userId);
+      cookies.set("token", token);
+      cookies.set("userId", userId);
+      cookies.set("username", username);
+      cookies.set("yourName", yourName);
+      cookies.set("email", email);
+      cookies.set("password", password);
       setIsAuth(true);
     });
-    // Axios.post("http://localhost:3001/signup", user).then((res) => {
-    //   const { token, userId, yourName, email, username, password } =
-    //   res.data;
-    //   console.log(token,"userid",userId);
-    //   cookies.set("token", token);
-    //   cookies.set("userId", userId);
-    //   cookies.set("username", username);
-    //   cookies.set("yourName", yourName);
-    //   cookies.set("email", email);
-    //   cookies.set("password", password);
-    //   setIsAuth(true);
-    // });
-    
+    if(error)
+    {
+      console.log(error)
+    }
     
   };
   return (
-    <form onSubmit={signUp} className="signUp">
+    <div className="signUp">
       <label> Sign Up</label>
       {/* firstname */}
       <input
@@ -71,8 +70,8 @@ function SignUp({ setIsAuth }) {
           setUser({ ...user, password: event.target.value });
         }}
       /> 
-      <button type="submit"> Sign Up</button>
-    </form>
+      <button onClick={signUp}> Sign Up</button>
+    </div>
   );
 }
 

@@ -11,6 +11,10 @@ const api_key = "ybjc4u29rz4j";
 const api_secret =
   "6r5hf3x2dwxbkdxgg3rujxwt4m3gysb6kz2pvs8z8fk8pnf8ybee7jrtw9wkqqjg";
 const serverClient = StreamChat.getInstance(api_key, api_secret);
+// Enable uniqueness constraints on App level
+await serverClient.updateAppSettings({
+  enforce_unique_usernames: 'app',
+});
 
 app.post("/signup", async (req, res) => {
   try {
