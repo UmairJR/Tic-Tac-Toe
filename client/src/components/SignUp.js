@@ -8,19 +8,19 @@ function SignUp({ setIsAuth }) {
   const cookies = new Cookies();
   const [user, setUser] = useState({});
   const [showError, setShowError] = useState(false);
-  const serverClient = StreamChat.getInstance("ybjc4u29rz4j","6r5hf3x2dwxbkdxgg3rujxwt4m3gysb6kz2pvs8z8fk8pnf8ybee7jrtw9wkqqjg");
+  const emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/
 
 
 
   const signUp = async (e) => {
     e.preventDefault();
-    console.log(Object.keys(user).length)
+    console.log(!emailRegex.test(user.email))
 
     // const response = await serverClient.queryUsers({ name: { $autocomplete: 'vishnu' } });
     // console.log(response)
     // e.preventDefault()
 
-    if(Object.keys(user).length) {
+    if(Object.keys(user).length < 4 && !emailRegex.test(user.email)) {
       setShowError(true)
       return false;
     } else {
@@ -33,7 +33,7 @@ function SignUp({ setIsAuth }) {
         cookies.set("username", username);
         cookies.set("yourName", yourName);
         cookies.set("email", email);
-        cookies.set("password", email);
+        cookies.set("password", password);
         setIsAuth(true);
       }).catch((e) => {
         console.log("This is the error", e)
