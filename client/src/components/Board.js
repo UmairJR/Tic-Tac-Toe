@@ -55,23 +55,17 @@ function Board({ result, setResult, setChannel }) {
     board.forEach((square, index) => {
       if (square == "") {
         filled = false;
-        
-      }
-      else {
-        filled = true;
       }
     });
 
     if (filled) {
-      setResult({ winner: "none", state: "tie" });
-      console.log("result", result)
+      setResult({ winner: "tie", state: "tie" });
     }
 
   };
 
   channel.on((event) => {
     if (event.type == "game-move" && event.user.id !== client.userID) {
-      console.log(event.data.player)
       const currentPlayer = event.data.player === "X" ? "O" : "X";
       setPlayer(currentPlayer);
       setTurn(currentPlayer);
@@ -94,18 +88,17 @@ function Board({ result, setResult, setChannel }) {
       </span>
       <div className={`board mt--10 ${result.winner != 'none' && result.state != 'none' ? 'disable' : ''}`}>
         {
-          result.winner != 'none' && result.state != 'none' ? 
-          <>
-            {result.state == "won" &&
-              <span className="fs--20 font--center pt--10 pb--10"> {result.winner} Won
-            </span>
-            }
+          result.winner != 'none' && result.state != 'none' ?
+            <>
+              {result.state == "won" &&
+                <span className="fs--20 font--center pt--10 pb--10"> {result.winner} Won
+                </span>
+              }
 
-            {result.state == "tie" &&
-              <span className="fs--20 font--center pt--10 pb--10">It’s a Draw!</span>
-            }
-          </>
-
+              {result.state == "tie" &&
+                <span className="fs--20 font--center pt--10 pb--10">It’s a Draw!</span>
+              }
+            </>
             :
             <span className="fs--20 font--center pt--10 pb--10">{turn == "X" ? 'Your move' : 'Their move'}</span>
         }
