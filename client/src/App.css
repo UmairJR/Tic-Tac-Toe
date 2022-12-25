@@ -1,16 +1,84 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -20,8 +88,17 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
@@ -29,16 +106,20 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
   content: "";
   content: none;
 }
@@ -78,6 +159,7 @@ body {
   font-size: size(16);
   touch-action: manipulation;
   line-height: normal;
+  position: relative;
 }
 
 a,
@@ -1363,6 +1445,9 @@ label {
 .homepage--buttons {
   width: 100%;
 }
+.homepage.center {
+  justify-content: center;
+}
 
 .form--login {
   display: flex;
@@ -1381,4 +1466,63 @@ label {
 }
 .message--error {
   background: #EB5757;
+}
+
+.board {
+  width: 100%;
+  background: #FFE79E;
+  display: flex;
+  flex-direction: column;
+}
+.board--group {
+  display: flex;
+  flex-direction: column;
+}
+.board--group .piece {
+  display: inline-block;
+  margin: 20px;
+  width: 38px;
+  height: 38px;
+}
+.board.disable {
+  pointer-events: none;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.row:first-child .square {
+  margin-top: 0;
+}
+.row:last-child .square {
+  margin-bottom: 0;
+}
+.row .square:first-child {
+  margin-left: 0;
+}
+.row .square:last-child {
+  margin-right: 0;
+}
+
+.square {
+  width: 33.3333333333%;
+  margin: 3px;
+  padding: 20px;
+  background-color: white;
+  text-align: center;
+}
+.square img {
+  opacity: 0;
+  transition: 0.4s ease-in;
+}
+.square img.show {
+  opacity: 1;
+}
+
+.back {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }/*# sourceMappingURL=App.css.map */

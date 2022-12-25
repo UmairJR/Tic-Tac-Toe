@@ -2,56 +2,68 @@ import React, { useState } from "react";
 import { useChatContext, Channel } from "stream-chat-react";
 import Game from "./Game";
 import CustomInput from "./CustomInput";
+import Title from "./Title";
 function JoinGame() {
   // const [rivalUsername, setRivalUsername] = useState("");
   const [rivalEmail, setRivalEmail] = useState("");
   const { client } = useChatContext();
   const [channel, setChannel] = useState(null);
+
+  const [showError, setShowError] = useState(false);
+  const emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/
+
   // const rivalUsername = response.users[0].name
-  const createChannel = async () => {
-    // const response = await client.queryUsers({ name: { $eq: rivalUsername } });
-    const response = await client.queryUsers({ email: { $eq: rivalEmail } });
+  const createChannel = async (e) => {
+    e.preventDefault();
 
-    if (response.users.length === 0) {
-      alert("User not found");
-      return;
+    if(rivalEmail == '' || !emailRegex.test(rivalEmail)) {
+      setShowError(true)
+      return false;
+    } else {
+      setShowError(false)
+      const response = await client.queryUsers({ email: { $eq: rivalEmail } });
+
+      if (response.users.length === 0) {
+        alert("User not found");
+        return;
+      }
+
+      const newChannel = await client.channel("messaging", {
+        members: [client.userID, response.users[0].id],
+
+      });
+
+      await newChannel.watch();
+      setChannel(newChannel);
     }
-
-    
-    const newChannel = await client.channel("messaging", {
-      members: [client.userID, response.users[0].id],
-      
-    });
-  
-    // console.log(response.users[0].name);
-    await newChannel.watch();
-    setChannel(newChannel);
-    // console.log("Channel:",newChannel);
   };
   return (
     <>
       {channel ? (
         <Channel channel={channel} Input={CustomInput}>
           {/* <Game rivalUsername={rivalUsername} channel={channel} setChannel={setChannel} /> */}
-          <Game rivalEmail={rivalEmail} channel={channel} setChannel={setChannel} />
+          <Game channel={channel} setChannel={setChannel} />
         </Channel>
       ) : (
-        <div className="joinGame">
-          <h4>Create Game</h4>
-          {/* <input
-            placeholder="Username of rival..."
-            onChange={(event) => {
-              setRivalUsername(event.target.value);
-            }}
-          /> */}
-          <input
-            placeholder="Email of rival..."
-            onChange={(event) => {
-              setRivalEmail(event.target.value);
-            }}
-          />
-          <button onClick={createChannel}> Join/Start Game</button>
-        </div>
+        <>
+          <Title title="Start a new game" heading="Whom do you want to play with?" />
+          <form className="form--login mt--20" onSubmit={createChannel}>
+            <span>
+              <label className="mb--10">Create Game</label>
+              <input
+                type="email"
+                placeholder="Type their email here"
+                onChange={(event) => {
+                  setRivalEmail(event.target.value);
+                }}
+              />
+            </span>
+            <span>
+              {showError && <span className="message--error message">Enter correct details.</span>}
+              <button type="submit" className="btn btn--yellow mt--20"> Start game </button>
+            </span>
+          </form>
+        </>
       )}
     </>
   );

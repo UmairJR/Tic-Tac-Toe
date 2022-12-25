@@ -1,47 +1,134 @@
 @use 'sass:math';
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
 }
+
 body {
-	line-height: 1;
+    line-height: 1;
 }
-ol, ul {
-	list-style: none;
+
+ol,
+ul {
+    list-style: none;
 }
-blockquote, q {
-	quotes: none;
+
+blockquote,
+q {
+    quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
 }
+
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 * {
@@ -50,17 +137,17 @@ table {
     box-sizing: border-box;
     outline: none;
     -webkit-tap-highlight-color: transparent;
-  }
+}
 
-  html {
+html {
     width: 100%;
     height: 100%;
     text-size-adjust: 100%;
     scroll-behavior: smooth;
 
-  }
+}
 
-  body {
+body {
     -webkit-overflow-scrolling: touch;
     text-size-adjust: 100%;
     overflow-x: hidden;
@@ -71,17 +158,18 @@ table {
     font-size: size(16);
     touch-action: manipulation;
     line-height: normal;
+    position: relative;
 }
 
 a,
 button {
-  text-decoration: none;
-  cursor: pointer;
-  color: currentColor;
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
+    text-decoration: none;
+    cursor: pointer;
+    color: currentColor;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 
 $baseSize: 16;
@@ -298,6 +386,10 @@ label {
     &--buttons {
         width: 100%;
     }
+
+    &.center {
+        justify-content: center;
+    }
 }
 
 .form {
@@ -320,4 +412,76 @@ label {
     &--error {
         background: #EB5757;
     }
+}
+
+.board {
+    width: 100%;
+    background: #FFE79E;
+    display: flex;
+    flex-direction: column;
+
+    &--group {
+        display: flex;
+        flex-direction: column;
+
+        .piece {
+            display: inline-block;
+            margin: 20px;
+            width: 38px;
+            height: 38px;
+        }
+    }
+
+    &.disable {
+        pointer-events: none;
+    }
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    &:first-child {
+        .square {
+            margin-top: 0;
+        }
+    }
+    &:last-child {
+        .square {
+            margin-bottom: 0;
+        }
+    }
+    .square {
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.square {
+    width: calc(100% / 3);
+    margin: 3px;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+
+    img {
+        opacity: 0;
+        transition: 0.4s ease-in;
+
+        &.show {
+            opacity: 1;
+        }
+    }
+}
+
+.back {
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }

@@ -14,10 +14,8 @@ function SignUp({ setIsAuth }) {
 
   const signUp = async (e) => {
     e.preventDefault();
-    console.log(!emailRegex.test(user.email))
 
     // const response = await serverClient.queryUsers({ name: { $autocomplete: 'vishnu' } });
-    // console.log(response)
     // e.preventDefault()
 
     if(Object.keys(user).length < 4 && !emailRegex.test(user.email)) {
@@ -27,7 +25,6 @@ function SignUp({ setIsAuth }) {
       Axios.post("http://localhost:3001/signup", user).then((res) => {
         const { token, userId, yourName, email, username, password } =
         res.data;
-        console.log(token,"userid",userId);
         cookies.set("token", token);
         cookies.set("userId", userId);
         cookies.set("username", username);
@@ -37,6 +34,7 @@ function SignUp({ setIsAuth }) {
         setIsAuth(true);
       }).catch((e) => {
         console.log("This is the error", e)
+        return false;
       });
     }
 

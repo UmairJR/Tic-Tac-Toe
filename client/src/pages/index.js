@@ -18,8 +18,10 @@ const Home = () => {
 
     const [isLogin, setIsLogin] = useState(false);
     const [isRegister, setIsRegister] = useState(false);
+    const [newGame, setNewGame] = useState(false);
 
     const logOut = () => {
+        setNewGame(false)
         cookies.remove("token");
         cookies.remove("userId");
         cookies.remove("firstName");
@@ -50,10 +52,25 @@ const Home = () => {
     return (
         <>
             {isAuth ? (
-                <Chat client={client}>
-                    <JoinGame />
-                    <button onClick={logOut}> Log Out</button>
-                </Chat>
+
+                <>
+                    {
+                        !newGame ?
+                        <section className='container--fluid font--center homepage center'>
+                            <h2 className="fs--70 font--normal">Your Games</h2>
+                            <button onClick={() => setNewGame(true)} className="btn btn--yellow mt--20">Start a new game</button>
+                        </section>
+                        :
+                        <section className="container--fluid">
+                            <button className='back' onClick={() => setNewGame(false)}>
+                                <img className="piece" src={require(`../assets/images/back.jpg`)} alt="back" />
+                            </button>
+                            <Chat client={client}>
+                                <JoinGame />
+                            </Chat>
+                        </section>
+                    }
+                </>
             ) : (
                 <>
                     {
@@ -73,6 +90,9 @@ const Home = () => {
                     {
                         isLogin &&
                         <section className='container--fluid'>
+                            <button className='back' onClick={() => setIsLogin(false)}>
+                                <img className="piece" src={require(`../assets/images/back.jpg`)} alt="back" />
+                            </button>
                             <Title title="Login" heading="Please enter your details" />
                             <Login setIsAuth={setIsAuth} />
                         </section>
@@ -80,6 +100,9 @@ const Home = () => {
                     {
                         isRegister &&
                         <section className='container--fluid'>
+                            <button className='back' onClick={() => setIsRegister(false)}>
+                                <img className="piece" src={require(`../assets/images/back.jpg`)} alt="back" />
+                            </button>
                             <Title title="Create account" heading="Let’s get to know you better!" />
                             <SignUp setIsAuth={setIsAuth} />
                         </section>
