@@ -52,15 +52,21 @@ function Board({ result, setResult, setChannel }) {
 
   const checkIfTie = () => {
     let filled = true;
-    board.forEach((square) => {
+    board.forEach((square, index) => {
       if (square == "") {
         filled = false;
+        
+      }
+      else {
+        filled = true;
       }
     });
 
     if (filled) {
       setResult({ winner: "none", state: "tie" });
+      console.log("result", result)
     }
+
   };
 
   channel.on((event) => {
@@ -87,11 +93,21 @@ function Board({ result, setResult, setChannel }) {
         <img className="piece" src={require(`../assets/images/${player == "X" ? 'x.svg' : 'o.svg'}`)} alt="turns" />
       </span>
       <div className={`board mt--10 ${result.winner != 'none' && result.state != 'none' ? 'disable' : ''}`}>
-      {
-        result.winner != 'none' && result.state != 'none' ?
-        <span className="fs--20 font--center pt--10 pb--10">{result.state == "won" && `${result.winner} Won` || result.state == 'tie' && 'It’s a Draw!'}</span>
-        :
-        <span className="fs--20 font--center pt--10 pb--10">{turn == "X" ? 'Your move' : 'Their move'}</span>
+        {
+          result.winner != 'none' && result.state != 'none' ? 
+          <>
+            {result.state == "won" &&
+              <span className="fs--20 font--center pt--10 pb--10"> {result.winner} Won
+            </span>
+            }
+
+            {result.state == "tie" &&
+              <span className="fs--20 font--center pt--10 pb--10">It’s a Draw!</span>
+            }
+          </>
+
+            :
+            <span className="fs--20 font--center pt--10 pb--10">{turn == "X" ? 'Your move' : 'Their move'}</span>
         }
         <div className="row">
           <Square
@@ -156,10 +172,11 @@ function Board({ result, setResult, setChannel }) {
       </div>
       {
         result.winner != 'none' && result.state != 'none' ?
-        <button className="btn btn--yellow mt--30" onClick={async () => {
-          await channel.stopWatching();
-          setChannel(null)}}>Start another game</button>
-        : null
+          <button className="btn btn--yellow mt--30" onClick={async () => {
+            await channel.stopWatching();
+            setChannel(null)
+          }}>Start another game</button>
+          : null
       }
     </>
   );

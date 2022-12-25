@@ -38,23 +38,7 @@ function Game({ channel, setChannel }) {
 
 
       <Board result={result} setChannel={setChannel} setResult={setResult} />
-      {/* <Window>
-        <MessageList
-          disableDateSeparator
-          closeReactionSelectorOnClick
-          hideDeletedMessages
-          messageActions={["react"]}
-        />
-        <MessageInput noFiles />
-      </Window> */}
-      {/* <button
-        onClick={async () => {
-          await channel.stopWatching();
-          setChannel(null);
-        }}
-      >
-        Leave Game
-      </button> */}
+      
     </div>
   );
 }
