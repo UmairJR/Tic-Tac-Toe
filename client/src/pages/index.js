@@ -57,7 +57,7 @@ const Home = () => {
                     {
                         !newGame ?
                         <section className='container--fluid font--center homepage center'>
-                            <h2 className="fs--70 font--normal">Your Games</h2>
+                            <h2 className="fs--70 font--normal font--family-bilbo">Your Games</h2>
                             <button onClick={() => setNewGame(true)} className="btn btn--yellow mt--20">Start a new game</button>
                         </section>
                         :
@@ -77,8 +77,8 @@ const Home = () => {
                         !isLogin && !isRegister ?
                         <section className="container--fluid font--center homepage">
                             <div className='mt--100'>
-                                <span className='fs--20 font--normal'>async</span>
-                                <h1 className='fs--70 font--normal'>tic tac <br /> toe</h1>
+                                <span className='fs--30 font--normal font--family-bilbo'>async</span>
+                                <h1 className='fs--80 font--normal font--family-bilbo'>tic tac <br /> toe</h1>
                             </div>
                             <div className='homepage--buttons mb--20'>
                                 <button onClick={() => setIsLogin(true)} className="btn btn--yellow mt--100">Login</button>

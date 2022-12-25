@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Bilbo';
+    src: url('Bilbo-Regular.eot');
+    src: url('Bilbo-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Bilbo-Regular.woff2') format('woff2'),
+        url('Bilbo-Regular.woff') format('woff'),
+        url('Bilbo-Regular.ttf') format('truetype'),
+        url('Bilbo-Regular.svg#Bilbo-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Epilogue';
+    src: url('Epilogue-Bold.eot');
+    src: url('Epilogue-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Epilogue-Bold.woff2') format('woff2'),
+        url('Epilogue-Bold.woff') format('woff'),
+        url('Epilogue-Bold.ttf') format('truetype'),
+        url('Epilogue-Bold.svg#Epilogue-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Epilogue';
+    src: url('Epilogue-Regular.eot');
+    src: url('Epilogue-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Epilogue-Regular.woff2') format('woff2'),
+        url('Epilogue-Regular.woff') format('woff'),
+        url('Epilogue-Regular.ttf') format('truetype'),
+        url('Epilogue-Regular.svg#Epilogue-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
